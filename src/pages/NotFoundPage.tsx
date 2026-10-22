@@ -1,13 +1,12 @@
 import { Link } from 'react-router'
-import Card from '../components/ui/Card'
 
 function NotFoundPage() {
   return (
-    <Card>
+    <article className="card">
       <h1>404 — Page not found</h1>
-      <p>This page does not exist.</p>
-      <Link to="/">Back to Home</Link>
-    </Card>
+      <p>Sorry, this page does not exist.</p>
+      <Link to="/">← Back to Home</Link>
+    </article>
   )
 }
 

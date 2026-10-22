@@ -1,8 +1,6 @@
 import { Link } from 'react-router'
-import Card from './ui/Card'
-import Tag from './ui/Tag'
-import { useLikes } from '../context/LikesContext'
 import type { Post } from '../data/posts'
+import { useLikes } from '../context/LikesContext'
 
 type PostCardProps = {
   post: Post
@@ -12,19 +10,19 @@ function PostCard({ post }: PostCardProps) {
   const { likes } = useLikes()
 
   return (
-    <Card>
-      <h2 className="card-title">{post.title}</h2>
-      <p className="meta">
+    <article className="card">
+      <h2>{post.title}</h2>
+      <p className="muted">
         {post.date} · ♥ {likes[post.id] ?? 0}
       </p>
-      <p>{post.excerpt}</p>
+      <p>{post.summary}</p>
       <div className="tags">
         {post.tags.map((tag) => (
-          <Tag key={tag} label={tag} />
+          <span key={tag} className="tag">{tag}</span>
         ))}
       </div>
-      <Link to={`/posts/${post.id}`}>Read more</Link>
-    </Card>
+      <Link to={`/posts/${post.id}`}>Read more →</Link>
+    </article>
   )
 }
 

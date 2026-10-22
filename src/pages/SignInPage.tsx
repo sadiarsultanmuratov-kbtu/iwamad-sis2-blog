@@ -1,29 +1,27 @@
 import { useNavigate } from 'react-router'
-import Card from '../components/ui/Card'
-import Button from '../components/ui/Button'
 import { useAuth } from '../context/AuthContext'
 
 function SignInPage() {
-  const { signedIn, signIn } = useAuth()
+  const { signedIn, setSignedIn } = useAuth()
   const navigate = useNavigate()
 
-  const handleSignIn = () => {
-    signIn()
-    navigate('/drafts') // after signing in, open the protected page
+  function handleSignIn() {
+    setSignedIn(true)
+    navigate('/drafts')
   }
 
   return (
-    <Card>
+    <article className="card">
       <h1>Sign in</h1>
       {signedIn ? (
         <p>You are already signed in.</p>
       ) : (
         <>
-          <p>The Drafts page is only for the author. Sign in to open it.</p>
-          <Button onClick={handleSignIn}>Sign in</Button>
+          <p>Drafts are only for the author. Please sign in to see them.</p>
+          <button className="btn" onClick={handleSignIn}>Sign in</button>
         </>
       )}
-    </Card>
+    </article>
   )
 }
 

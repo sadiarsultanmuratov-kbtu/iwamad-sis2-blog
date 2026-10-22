@@ -1,78 +1,199 @@
-/* Page base — every colour and space comes from tokens.css */
+/* colours and spaces (all text colours pass 4.5 : 1) */
+:root {
+  --red: #b91c1c;
+  --red-light: #fee2e2;
+  --red-dark: #991b1b;
+  --bg: #fff5f5;
+  --white: #ffffff;
+  --text: #1f1f1f;
+  --muted: #4b5563;
+  --border: #e5d4d4;
+  --space-s: 8px;
+  --space-m: 16px;
+  --space-l: 24px;
+  --radius: 10px;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
-  font-size: 16px;
+  font-family: Arial, sans-serif;
   line-height: 1.6;
-  background: var(--color-surface);
-  color: var(--color-text);
+  background: var(--bg);
+  color: var(--text);
 }
 
 h1,
-h2 {
-  margin: 0;
-  line-height: 1.25;
-}
-
-h1 {
-  font-size: 32px;
-}
-
-h2 {
-  font-size: 24px;
-}
-
-.card-title {
-  font-size: 20px;
-}
-
+h2,
 p {
   margin: 0;
 }
 
 a {
-  color: var(--color-primary);
+  color: var(--red);
 }
 
-.page {
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--red-dark);
+  outline-offset: 2px;
+}
+
+/* header: column on a phone, one row on a big screen */
+.header {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-s);
+  padding: var(--space-m);
+  background: var(--red);
+  color: var(--white);
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-m);
+}
+
+.nav a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+.nav a.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+@media (min-width: 640px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-l);
   max-width: 1000px;
   margin: 0 auto;
-  padding: var(--space-6) var(--space-4);
+  padding: var(--space-l) var(--space-m);
 }
 
-.intro {
+.footer {
+  padding: var(--space-m);
+  text-align: center;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+/* home page: photo above the text on a phone, next to it on a big screen */
+.hero {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-l);
+  align-items: center;
 }
 
-.meta {
-  color: var(--color-text-muted);
+.hero div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  align-items: flex-start;
+}
+
+.photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--red);
+}
+
+@media (min-width: 640px) {
+  .hero {
+    flex-direction: row;
+  }
+}
+
+/* cards: 1 column on a phone, up to 3 on a laptop */
+.grid {
+  display: grid;
+  gap: var(--space-m);
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  padding: var(--space-l);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.card h2 {
+  font-size: 20px;
+}
+
+.post {
+  max-width: 720px;
+  gap: var(--space-m);
+}
+
+.muted {
+  color: var(--muted);
   font-size: 14px;
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
+  gap: var(--space-s);
 }
 
-.link-list {
-  padding-left: var(--space-4);
-  overflow-wrap: anywhere;
-}
-
-.site-footer {
-  padding: var(--space-4);
-  border-top: 1px solid var(--color-border);
-  color: var(--color-text-muted);
+.tag {
+  padding: 2px var(--space-s);
+  border-radius: var(--radius);
+  background: var(--red-light);
+  color: var(--red-dark);
   font-size: 14px;
-  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  align-self: flex-start;
+  min-height: 44px;
+  padding: 10px var(--space-m);
+  border: 2px solid var(--red);
+  border-radius: var(--radius);
+  background: var(--red);
+  color: var(--white);
+  font: inherit;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-light {
+  background: var(--white);
+  color: var(--red);
+}
+
+/* white focus ring on the red header */
+.header a:focus-visible,
+.header button:focus-visible {
+  outline-color: var(--white);
 }

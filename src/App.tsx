@@ -19,7 +19,7 @@ function App() {
         <Route path="contact" element={<ContactPage />} />
         <Route path="signin" element={<SignInPage />} />
 
-        {/* Protected: only a signed-in reader gets past RequireSignIn */}
+        {/* protected page */}
         <Route element={<RequireSignIn />}>
           <Route path="drafts" element={<DraftsPage />} />
         </Route>

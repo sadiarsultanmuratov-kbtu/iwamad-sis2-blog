@@ -1,16 +1,34 @@
-import { Outlet } from 'react-router'
-import Header from './Header'
-import Footer from './Footer'
+import { NavLink, Outlet } from 'react-router'
+import { useAuth } from '../context/AuthContext'
 
-// Header and Footer stay on screen; only <Outlet /> changes when the page changes.
 function Layout() {
+  const { signedIn, setSignedIn } = useAuth()
+
   return (
     <>
-      <Header />
-      <main className="page">
+      <header className="header">
+        <span className="logo">Shadiyar's Blog</span>
+        <nav className="nav">
+          <NavLink to="/" end>Home</NavLink>
+          <NavLink to="/posts">Posts</NavLink>
+          <NavLink to="/contact">Contact</NavLink>
+          <NavLink to="/drafts">Drafts</NavLink>
+          {signedIn ? (
+            <button className="btn btn-light" onClick={() => setSignedIn(false)}>
+              Sign out
+            </button>
+          ) : (
+            <NavLink to="/signin">Sign in</NavLink>
+          )}
+        </nav>
+      </header>
+
+      {/* only this part changes when the page changes */}
+      <main className="main">
         <Outlet />
       </main>
-      <Footer />
+
+      <footer className="footer">© 2026 Sultanmuratov Shadiyar</footer>
     </>
   )
 }

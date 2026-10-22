@@ -1,25 +1,20 @@
 import { createContext, useContext, useState, type ReactNode } from 'react'
 
-// "Signed in" is just one boolean. No passwords, no server (real auth is Week 13).
-type AuthContextValue = {
+type AuthValue = {
   signedIn: boolean
-  signIn: () => void
-  signOut: () => void
+  setSignedIn: (value: boolean) => void
 }
 
-const AuthContext = createContext<AuthContextValue | null>(null)
+const AuthContext = createContext<AuthValue | null>(null)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [signedIn, setSignedIn] = useState(false)
 
-  const signIn = () => setSignedIn(true)
-  const signOut = () => setSignedIn(false)
-
-  return <AuthContext value={{ signedIn, signIn, signOut }}>{children}</AuthContext>
+  return <AuthContext value={{ signedIn, setSignedIn }}>{children}</AuthContext>
 }
 
 export function useAuth() {
   const value = useContext(AuthContext)
-  if (!value) throw new Error('useAuth must be used inside <AuthProvider>')
+  if (!value) throw new Error('useAuth must be inside AuthProvider')
   return value
 }

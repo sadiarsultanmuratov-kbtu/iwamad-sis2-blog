@@ -1,4 +1,3 @@
-import Button from './ui/Button'
 import { useLikes } from '../context/LikesContext'
 
 type LikeButtonProps = {
@@ -7,9 +6,13 @@ type LikeButtonProps = {
 
 function LikeButton({ postId }: LikeButtonProps) {
   const { likes, addLike } = useLikes()
-  const count = likes[postId] ?? 0 // a post nobody liked yet has no entry → 0
+  const count = likes[postId] ?? 0 // no likes yet = 0
 
-  return <Button onClick={() => addLike(postId)}>♥ Like ({count})</Button>
+  return (
+    <button className="btn" onClick={() => addLike(postId)}>
+      ♥ Like ({count})
+    </button>
+  )
 }
 
 export default LikeButton

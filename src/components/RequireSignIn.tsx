@@ -1,8 +1,7 @@
 import { Navigate, Outlet } from 'react-router'
 import { useAuth } from '../context/AuthContext'
 
-// A layout route that checks BEFORE it renders:
-// signed in → show the page inside (<Outlet />), signed out → go to the sign-in page.
+// signed in → show the page, signed out → go to /signin
 function RequireSignIn() {
   const { signedIn } = useAuth()
 

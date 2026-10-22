@@ -5,7 +5,7 @@ import PostsPage from './PostsPage'
 import { LikesProvider } from '../context/LikesContext'
 import { posts } from '../data/posts'
 
-it('shows one card per post in the array', () => {
+it('shows one card for every post', () => {
   render(
     <MemoryRouter>
       <LikesProvider>
@@ -14,6 +14,5 @@ it('shows one card per post in the array', () => {
     </MemoryRouter>,
   )
 
-  // Every PostCard is a Card, and Card renders an <article>
   expect(screen.getAllByRole('article')).toHaveLength(posts.length)
 })

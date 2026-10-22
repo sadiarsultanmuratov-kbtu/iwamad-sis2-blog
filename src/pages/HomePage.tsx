@@ -5,18 +5,22 @@ import { posts } from '../data/posts'
 function HomePage() {
   return (
     <>
-      <section className="intro">
-        <h1>Hi, I'm Shadiyar</h1>
-        <p>
-          I'm an IT Management student at KBTU. In this blog I write about what I learn in the
-          Interactive Mobile and Web Application Development course, one week at a time.
-        </p>
-        <Link to="/posts">See all {posts.length} posts</Link>
+      <section className="hero">
+        {/* BASE_URL = /iwamad-sis2-blog/ on GitHub Pages */}
+        <img src={`${import.meta.env.BASE_URL}shadiyar.jpg`} alt="Shadiyar" className="photo" />
+        <div>
+          <h1>Hi, I'm Shadiyar 👋</h1>
+          <p>
+            I study IT Management at KBTU. Every week in the web development course I learn
+            something new, and in this blog I write about it in simple words.
+          </p>
+          <Link to="/posts" className="btn">Read all {posts.length} posts</Link>
+        </div>
       </section>
 
-      <h2>Start here</h2>
-      <div className="card-grid">
-        {posts.slice(0, 3).map((post) => (
+      <h2>Latest posts</h2>
+      <div className="grid">
+        {posts.slice(-3).map((post) => (
           <PostCard key={post.id} post={post} />
         ))}
       </div>

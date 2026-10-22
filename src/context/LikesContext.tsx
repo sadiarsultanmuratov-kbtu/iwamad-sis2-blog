@@ -1,19 +1,18 @@
 import { createContext, useContext, useState, type ReactNode } from 'react'
 
-// likes[postId] = how many times that post was liked, e.g. { 1: 2, 3: 1 }
-type LikesContextValue = {
+// likes for every post, for example { 1: 2, 3: 1 }
+type LikesValue = {
   likes: Record<number, number>
   addLike: (postId: number) => void
 }
 
-const LikesContext = createContext<LikesContextValue | null>(null)
+const LikesContext = createContext<LikesValue | null>(null)
 
 export function LikesProvider({ children }: { children: ReactNode }) {
   const [likes, setLikes] = useState<Record<number, number>>({})
 
-  // Copy the old object and add 1 only for this post — the other posts keep their own value
-  const addLike = (postId: number) => {
-    setLikes((prev) => ({ ...prev, [postId]: (prev[postId] ?? 0) + 1 }))
+  function addLike(postId: number) {
+    setLikes((old) => ({ ...old, [postId]: (old[postId] ?? 0) + 1 }))
   }
 
   return <LikesContext value={{ likes, addLike }}>{children}</LikesContext>
@@ -21,6 +20,6 @@ export function LikesProvider({ children }: { children: ReactNode }) {
 
 export function useLikes() {
   const value = useContext(LikesContext)
-  if (!value) throw new Error('useLikes must be used inside <LikesProvider>')
+  if (!value) throw new Error('useLikes must be inside LikesProvider')
   return value
 }
